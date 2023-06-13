@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -110,6 +112,83 @@ class UIHelper{
       ],
     );
   }
+  static Widget showFile(String content, BuildContext context,
+      List<File> listReceipt) {
+    return Column(
+      children: <Widget>[
+        Text("$content${listReceipt.length} ảnh"),
+        SizedBox(
+          width: 200,
+          height: 200,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: listReceipt.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  elevation: 0.0,
+                  shape: UIHelper.getShapeCard(0.1, 0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 200,
+                        width:200,
+                        child: GestureDetector(
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Image.file(
+                              listReceipt[index]
+                              // "${AppConfigs
+                              //     .apiServerImage}${listReceipt[index]}",
+
+                              // loadingBuilder: (BuildContext context,
+                              //     Widget child,
+                              //     ImageChunkEvent loadingProgress) {
+                              //   if (loadingProgress == null) return child;
+                              //   return Center(
+                              //     child: CircularProgressIndicator(
+                              //       value: loadingProgress.expectedTotalBytes !=
+                              //               null
+                              //           ? loadingProgress
+                              //                   .cumulativeBytesLoaded /
+                              //               loadingProgress.expectedTotalBytes
+                              //           : null,
+                              //     ),
+                              //   );
+                              // },
+                              ,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          onTap: () {
+//                                      ShowZoomImageDialog
+//                                          .show(
+//                                          context,
+//                                          listImage[
+//                                          index]);
+
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) =>
+                            //           ShowZomImageBigDialog(
+                            //             image: listReceipt[index],
+                            //             index: index,
+                            //             listImage: listReceipt,
+                            //           )),
+                            // );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+        )
+      ],
+    );
+  }
+
   static Widget showPDF(String content, BuildContext context,
       List<String> listPdf) {
 
